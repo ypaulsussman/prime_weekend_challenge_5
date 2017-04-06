@@ -1,34 +1,45 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('OneController', ['$scope', 'CatService', function($scope, CatService){
-  $scope.scopeSpicyTuna = CatService.spicyTuna;
+myApp.controller('InputController', ['$scope', 'MovieService', function($scope, MovieService){
+  $scope.movie = MovieService.movie;
+  $scope.saveMovie = MovieService.saveMovie;
 }]);
 
-myApp.controller('TwoController', ['$scope', 'CatService', function($scope, CatService){
-  console.log(CatService.grilledCheese);
+myApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
+  $scope.movieListObj = MovieService.movieListObj;
+  console.log("display movieList:" , $scope.movieListObj);
 
-  $scope.scopeAddToGrilledCheese = CatService.addToGrilledCheese;
-  $scope.scopeSpicyTuna = CatService.spicyTuna;
 }]);
 
-myApp.factory('CatService', [function(){
+myApp.factory('MovieService', [function(){
   //Private
-  var fishStick = 60;
-
-  var spicyTuna = {
-    grilledCheese : 10,
-    frenchToast: "Here is some data bound!"
+  var movie = {
+    name : "",
+    desc: "",
+    director: "",
+    length: "",
+  };
+  var movieList = [];
+  var movieListObj = {
+    movieList : movieList
   };
 
-  function addToGrilledCheese(){
-    spicyTuna.grilledCheese += 1;
-    console.log(spicyTuna.grilledCheese);
+  function saveMovie(movie){
+    console.log("movie to save: ", movie);
+    movieListObj.movieList.push({
+      name: movie.name,
+      desc: movie.desc,
+      director: movie.director,
+      length: movie.length
+    });
+
+    console.log("movielist post-push: ", movieListObj.movieList);
   }
 
   //Public
   return {
-    spicyTuna : spicyTuna,
-    fishStick : fishStick,
-    addToGrilledCheese : addToGrilledCheese
+    movie : movie,
+    saveMovie : saveMovie,
+    movieListObj: movieListObj
   };
-}]);
+}]);//end factory

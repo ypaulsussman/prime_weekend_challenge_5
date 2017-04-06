@@ -1,0 +1,34 @@
+html, body{
+  background-color: seashell;
+  height: 100%
+}
+
+#submitBtn{
+  float: right;
+  margin-bottom: 3em;
+}
+
+input{
+  width: 100%;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: azure;
+}
+
+.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+   background-color: LavenderBlush;
+}
+
+#icDiv{
+  border-bottom: 2px solid dimgray;
+}
+
+#dcDiv{
+  border-left: 2px solid dimgray;
+  height: 100%
+}
+
+#basketDiv{
+  height: 100%
+}

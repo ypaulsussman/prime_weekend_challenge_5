@@ -1,26 +1,66 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <title>Chi MEAN</title>
+    <title>Film Library</title>
 
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="styles/style.css" />
 
     <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
     <script type="text/javascript" src="scripts/client.min.js"></script>
-  </head>
-  <body>
+</head>
 
-    <div ng-controller="OneController">
-      <input type="text" ng-model="scopeSpicyTuna.frenchToast">
-      <p> {{ scopeSpicyTuna.grilledCheese }} </p>
+<body>
+    <div class="container-fluid" id="basketDiv">
+        <div ng-controller="InputController" class="col-sm-4" id="icDiv">
+            <h1>Add a Movie!</h1>
+            <form>
+                <div class="form-group">
+                    <label for="nameInput">Title: </label>
+                    <input id="nameInput" type="text" ng-model="movie.name">
+                </div>
+                <div class="form-group">
+                    <label for="directorInput">Director: </label>
+                    <input id="directorInput" type="text" ng-model="movie.director">
+                </div>
+                <div class="form-group">
+                    <label for="lengthInput">Running Time: </label>
+                    <input id="lengthInput" type="text" ng-model="movie.length">
+                </div>
+                <div class="form-group">
+                    <label for="descInput">Description: </label>
+                    <input id="descInput" type="text" ng-model="movie.desc">
+                </div>
+            </form>
+            <button type="button" class="btn" id="submitBtn" ng-click="saveMovie(movie)">Submit Film</button>
+        </div>
+        <div class="tester">
+
+        </div>
+        <div ng-controller="DisplayController" class="col-sm-8" id="dcDiv">
+            <h1>Movies in Library</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Director</th>
+                        <th>Running Time</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="movie in movieListObj.movieList">
+                        <td> {{ movie.name }}</td>
+                        <td> {{ movie.director }}</td>
+                        <td> {{ movie.length }}</td>
+                        <td> {{ movie.desc }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</body>
 
-    <div ng-controller="TwoController">
-      <p> {{ scopeSpicyTuna.frenchToast }} </p>
-      <button ng-click="scopeAddToGrilledCheese()">Add Yummy Grilled Cheese!</button>
-    </div>
-
-  </body>
 </html>
