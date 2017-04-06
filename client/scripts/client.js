@@ -1,8 +1,13 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('InputController', ['$scope', 'MovieService', function($scope, MovieService){
+  $scope.defaultMovie = {};
   $scope.movie = MovieService.movie;
   $scope.saveMovie = MovieService.saveMovie;
+  $scope.clear = function() {
+    $scope.movie = $scope.defaultMovie;
+    $scope.defaultMovie = {};
+  };
 }]);
 
 myApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
