@@ -15,6 +15,8 @@ myApp.controller('DisplayController', ['$scope', 'SearchService', 'WriteService'
 
 myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', function($scope, SearchService, WriteService){
   $scope.movieListObj = WriteService.movieListObj;
+  WriteService.showSavedMovies();
+  console.log('ssm just finished');
 }]);
 
 //================================================================================================================//
@@ -44,19 +46,22 @@ myApp.factory('WriteService', ['$http', function($http){
     movieList: movieList
   };
 
-  function saveMovie(newMovie) {
-      var copy = angular.copy[newMovie];
-      console.log('copy of new movie: ', newMovie);
-      $http.post('/movies', newMovie.movie).then(function(response) {
-        console.log('response from mongo: ', response);
+  function showSavedMovies() {
+    $http.get('/movies').then(function(response) {
+      movieListObj.movieList = response.data;
+      console.log('mlo.ml is now: ', movieListObj.movieList);
       });
+    }//end showSavedMovies
 
+  function saveMovie(newMovie) {
+    var copy = angular.copy[newMovie];
+    $http.post('/movies', newMovie.movie).then(function(response) {
+      });
+    }//end saveMovie
 
-      // movieListObj.movieList.push(newMovie.movie);
-      // console.log(movieListObj);
-    }
   return{
     saveMovie : saveMovie,
+    showSavedMovies : showSavedMovies,
     movieListObj : movieListObj,
   };
 }]);//end factory

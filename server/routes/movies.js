@@ -14,6 +14,17 @@ var MovieSchema = mongoose.Schema({
 
 var Movies = mongoose.model("movies", MovieSchema);
 
+router.get('/',function(req,res) {
+  Movies.find(function(err, favMovies) {
+    if (err) {
+      console.log('error reading from db: ', err);
+      res.sendStatus(500);
+    }
+    res.send(favMovies);
+  });
+});
+
+
 router.post('/', function(req, res) {
   console.log('request received: ', req.body);
   var newMovie = new Movies();
