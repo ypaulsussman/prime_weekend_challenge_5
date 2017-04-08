@@ -3,13 +3,23 @@ html, body{
   height: 100%
 }
 
-#submitBtn{
-  float: right;
-  margin-bottom: 3em;
+form {
+  overflow: auto;
 }
 
-input{
+#submitBtn{
+  float: right;
+}
+
+[class*="col-"]{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+#displayDiv {
   width: 100%;
+  background-color: salmon;
+  border-top: 2px solid dimgray;
 }
 
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
@@ -20,11 +30,11 @@ input{
    background-color: LavenderBlush;
 }
 
-#icDiv{
-  border-bottom: 2px solid dimgray;
+#inputDiv{
+  /*border-bottom: 2px solid dimgray;*/
 }
 
-#dcDiv{
+#savedDiv{
   border-left: 2px solid dimgray;
   height: 100%
 }

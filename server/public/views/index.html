@@ -9,38 +9,37 @@
     <link rel="stylesheet" href="styles/style.css" />
 
     <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
-    <script type="text/javascript" src="scripts/client.min.js"></script>
+    <script type="text/javascript" src="scripts/client.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid" id="basketDiv">
-        <div ng-controller="InputController" class="col-sm-4" id="icDiv">
-            <h1>Add a Movie!</h1>
+
+    <div class="container" id="basketDiv">
+        <div ng-controller="InputController" class="col-sm-4" id="inputDiv">
+            <h2>Find a Movie!</h2>
             <form>
                 <div class="form-group">
                     <label for="nameInput">Title: </label>
-                    <input id="nameInput" type="text" ng-model="movie.name">
+                    <input id="nameInput" class="form-control" type="text" ng-model="movie.searchString">
                 </div>
-                <div class="form-group">
-                    <label for="directorInput">Director: </label>
-                    <input id="directorInput" type="text" ng-model="movie.director">
-                </div>
-                <div class="form-group">
-                    <label for="lengthInput">Running Time: </label>
-                    <input id="lengthInput" type="text" ng-model="movie.length">
-                </div>
-                <div class="form-group">
-                    <label for="descInput">Description: </label>
-                    <input id="descInput" type="text" ng-model="movie.desc">
-                </div>
+                <button type="button" class="btn" id="submitBtn" ng-click="findMovie(movie); clear()">Find Film</button>
             </form>
-            <button type="button" class="btn" id="submitBtn" ng-click="saveMovie(movie); clear()">Submit Film</button>
+            <br>
+            <div ng-controller="DisplayController" id="displayDiv">
+              <!-- stretch: replace "results with 'your search returned...' "  -->
+              <h2>Results</h2>
+              <img src={{searchResults.movies.Poster}}>
+              <p>Film: {{searchResults.movies.Title}}</p>
+              <p>Director: {{searchResults.movies.Director}}</p>
+              <p>Cast: {{searchResults.movies.Actors}}</p>
+              <p>Plot: {{searchResults.movies.Plot}}</p>
+              <p>Runtime: {{searchResults.movies.Runtime}}</p>
+              <p>Year: {{searchResults.movies.Year}}</p>
+                <!-- <button ng-click="saveMovie($index)">Add to Favorites</button> -->
+              </div>
         </div>
-        <div class="tester">
-
-        </div>
-        <div ng-controller="DisplayController" class="col-sm-8" id="dcDiv">
-            <h1>Movies in Library</h1>
+        <div ng-controller="SavedController" class="col-sm-8" id="savedDiv">
+            <h2>Movies in Library</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
