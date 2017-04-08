@@ -38,7 +38,7 @@ myApp.factory('SearchService', ['$http', function($http){
 }]);//end factory
 
 
-myApp.factory('WriteService', [function() {
+myApp.factory('WriteService', ['$http', function($http){
   var movieList = [];
   var movieListObj = {
     movieList: movieList
@@ -46,12 +46,17 @@ myApp.factory('WriteService', [function() {
 
   function saveMovie(newMovie) {
       var copy = angular.copy[newMovie];
-      movieListObj.movieList.push(newMovie.movie);
-      console.log(movieListObj);
+      console.log('copy of new movie: ', newMovie);
+      $http.post('/movies', newMovie.movie).then(function(response) {
+        console.log('response from mongo: ', response);
+      });
+
+
+      // movieListObj.movieList.push(newMovie.movie);
+      // console.log(movieListObj);
     }
   return{
     saveMovie : saveMovie,
     movieListObj : movieListObj,
-
   };
 }]);//end factory
