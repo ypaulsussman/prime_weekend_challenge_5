@@ -13,9 +13,9 @@ Your application will need to be built from the ground up using Angular, Node, E
 
 * The information that is returned from the API will be a movie object. You must display some of the movie information on the DOM in a meaningful way. Additionally, you must have an 'add to favorites' button on those results.[X]
 
-* When the 'add to favorites' button is clicked, it should record the information for the movie and store it into an array of favorites.
+* When the 'add to favorites' button is clicked, it should record the information for the movie and store it into an array of favorites. [X]
 
-* The other view should display the favorite movies selected by the user.
+* The other view should display the favorite movies selected by the user. [X]
 
 ## Hard Mode
 When a favorite is added to the favorites list, store the favorites list in a Mongo Database.

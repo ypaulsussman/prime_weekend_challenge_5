@@ -26,35 +26,34 @@
             </form>
             <br>
             <div ng-controller="DisplayController" id="displayDiv">
-              <!-- stretch: replace "results with 'your search returned...' "  -->
-              <h2>Results</h2>
-              <img src={{searchResults.movies.Poster}}>
-              <p>Film: {{searchResults.movies.Title}}</p>
-              <p>Director: {{searchResults.movies.Director}}</p>
-              <p>Cast: {{searchResults.movies.Actors}}</p>
-              <p>Plot: {{searchResults.movies.Plot}}</p>
-              <p>Runtime: {{searchResults.movies.Runtime}}</p>
-              <p>Year: {{searchResults.movies.Year}}</p>
-                <!-- <button ng-click="saveMovie($index)">Add to Favorites</button> -->
-              </div>
+                <h2>Search Result:</h2>
+                <img src={{searchResults.movie.Poster}} id="poster">
+                <p><strong>Film: </strong>{{searchResults.movie.Title}}</p>
+                <p><strong>Director: </strong>{{searchResults.movie.Director}}</p>
+                <p><strong>Cast: </strong>{{searchResults.movie.Actors}}</p>
+                <p><strong>Plot: </strong>{{searchResults.movie.Plot}}</p>
+                <p><strong>Runtime: </strong>{{searchResults.movie.Runtime}}</p>
+                <p><strong>Year: </strong>{{searchResults.movie.Year}}</p>
+                <button ng-click="saveMovie(searchResults)">Add to Favorites</button>
+            </div>
         </div>
         <div ng-controller="SavedController" class="col-sm-8" id="savedDiv">
-            <h2>Movies in Library</h2>
+            <h2>Saved Movies</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Title</th>
                         <th>Director</th>
-                        <th>Running Time</th>
+                        <th>Length</th>
                         <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="movie in movieListObj.movieList">
-                        <td> {{ movie.name }}</td>
-                        <td> {{ movie.director }}</td>
-                        <td> {{ movie.length }}</td>
-                        <td> {{ movie.desc }}</td>
+                        <td> {{ movie.Title }}</td>
+                        <td> {{ movie.Director }}</td>
+                        <td> {{ movie.Runtime }}</td>
+                        <td> {{ movie.Plot }}</td>
                     </tr>
                 </tbody>
             </table>

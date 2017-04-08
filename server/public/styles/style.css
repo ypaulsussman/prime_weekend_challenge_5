@@ -18,7 +18,6 @@ form {
 
 #displayDiv {
   width: 100%;
-  background-color: salmon;
   border-top: 2px solid dimgray;
 }
 
@@ -41,4 +40,9 @@ form {
 
 #basketDiv{
   height: 100%
+}
+
+#poster{
+  display: block;
+  margin: auto;
 }
