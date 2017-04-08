@@ -56,6 +56,7 @@ myApp.factory('WriteService', ['$http', function($http){
   function saveMovie(newMovie) {
     var copy = angular.copy[newMovie];
     $http.post('/movies', newMovie.movie).then(function(response) {
+      showSavedMovies();
       });
     }//end saveMovie
 
