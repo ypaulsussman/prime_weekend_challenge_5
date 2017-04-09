@@ -17,6 +17,7 @@ myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', 
   $scope.movieListObj = WriteService.movieListObj;
   WriteService.showSavedMovies();
   console.log('ssm just finished');
+  $scope.removeFav = WriteService.removeFav;
 }]);
 
 //================================================================================================================//
@@ -55,14 +56,24 @@ myApp.factory('WriteService', ['$http', function($http){
 
   function saveMovie(newMovie) {
     var copy = angular.copy[newMovie];
-    $http.post('/movies', newMovie.movie).then(function(response) {
+    $http.post('/movies', newMovie.movie).then(function() {
       showSavedMovies();
       });
     }//end saveMovie
+
+  function removeFav(index) {
+    console.log(index);
+    var removeID = movieListObj.movieList[index]._id;
+    console.log(removeID);
+    $http.delete('/movies/'+removeID).then(function() {
+      showSavedMovies();
+    });
+    }
 
   return{
     saveMovie : saveMovie,
     showSavedMovies : showSavedMovies,
     movieListObj : movieListObj,
+    removeFav : removeFav
   };
 }]);//end factory

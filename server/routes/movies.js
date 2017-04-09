@@ -22,7 +22,7 @@ router.get('/',function(req,res) {
     }
     res.send(favMovies);
   });
-});
+});//end router.get
 
 
 router.post('/', function(req, res) {
@@ -42,9 +42,20 @@ router.post('/', function(req, res) {
     }
     res.send(savedMovie);
   });
+});//end router.post
 
-});
-
+router.delete('/:id', function(req, res) {
+  var removeID = req.params.id;
+  console.log('request received: ', removeID);
+  Movies.findByIdAndRemove(removeID, function(err, deletedFav){
+    if(err){
+      console.log('error removing: ', err);
+      res.sendStatus(500);
+    }
+    console.log(deletedFav, ' removed from db');
+    res.sendStatus(200);
+  });
+});//end router.delete
 
 
 module.exports = router;

@@ -22,7 +22,7 @@
                     <label for="nameInput">Title: </label>
                     <input id="nameInput" class="form-control" type="text" ng-model="movie.searchString">
                 </div>
-                <button type="button" class="btn" id="submitBtn" ng-click="findMovie(movie); clear()">Find Film</button>
+                <button type="button" class="btn btn-default" id="submitBtn" ng-click="findMovie(movie); clear()">Find Film</button>
             </form>
             <br>
             <div ng-controller="DisplayController" id="displayDiv">
@@ -35,7 +35,8 @@
                 <p><strong>Plot: </strong>{{searchResults.movie.Plot}}</p>
                 <p><strong>Runtime: </strong>{{searchResults.movie.Runtime}}</p>
                 <p><strong>Year: </strong>{{searchResults.movie.Year}}</p>
-                <button ng-click="saveMovie(searchResults)">Add to Favorites</button>
+                <button class="btn btn-default" id="favBtn" ng-click="saveMovie(searchResults)">Add to Favorites</button>
+                <br><br><br>
             </div>
         </div>
         <div ng-controller="SavedController" class="col-sm-8" id="savedDiv">
@@ -55,6 +56,7 @@
                         <td> {{ movie.director }}</td>
                         <td> {{ movie.runtime }}</td>
                         <td> {{ movie.plot }}</td>
+                        <td> <button class="btn btn-default btn-sm" ng-click="removeFav($index)">Remove</button></td>
                     </tr>
                 </tbody>
             </table>

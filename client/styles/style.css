@@ -7,7 +7,7 @@ form {
   overflow: auto;
 }
 
-#submitBtn{
+#submitBtn, #favBtn{
   float: right;
 }
 
@@ -19,6 +19,7 @@ form {
 #displayDiv {
   width: 100%;
   border-top: 2px solid dimgray;
+  overflow: auto;
 }
 
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
