@@ -1,3 +1,10 @@
+@media (min-width:1800px) {
+  html, body{
+  display: flex;
+  justify-content: center;
+  }
+}
+
 html, body{
   background-color: seashell;
   height: 100%
@@ -7,19 +14,40 @@ form {
   overflow: auto;
 }
 
-#submitBtn, #favBtn{
-  float: right;
+h2, p, button, th, td{
+  font-family: 'Montserrat', sans-serif;
 }
 
-[class*="col-"]{
-  padding-right: 0px;
-  padding-left: 0px;
+#basketDiv{
+  height: 100%;
 }
 
 #displayDiv {
   width: 100%;
-  border-top: 2px solid dimgray;
   overflow: auto;
+}
+
+#submitBtn, #favBtn{
+  float: right;
+}
+
+hr{
+  margin-right: -15px;
+  border: 1px solid dimgray;
+}
+
+#displayHeader{
+  margin-top: -5px;
+}
+
+#poster{
+  display: block;
+  margin: auto;
+}
+
+#savedDiv{
+  border-left: 2px solid dimgray;
+  height: 100%
 }
 
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
@@ -30,20 +58,6 @@ form {
    background-color: LavenderBlush;
 }
 
-#inputDiv{
-  /*border-bottom: 2px solid dimgray;*/
-}
-
-#savedDiv{
-  border-left: 2px solid dimgray;
-  height: 100%
-}
-
-#basketDiv{
-  height: 100%
-}
-
-#poster{
-  display: block;
-  margin: auto;
+table{
+  max-width: 900px !important;
 }

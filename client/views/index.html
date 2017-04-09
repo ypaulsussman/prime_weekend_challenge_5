@@ -7,26 +7,26 @@
 
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="styles/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
-    <script type="text/javascript" src="scripts/client.js"></script>
+    <script type="text/javascript" src="scripts/client.min.js"></script>
 </head>
 
 <body>
 
-    <div class="container" id="basketDiv">
+    <div class="container-fluid" id="basketDiv">
         <div ng-controller="InputController" class="col-sm-4" id="inputDiv">
             <h2>Find a Movie!</h2>
             <form>
                 <div class="form-group">
-                    <label for="nameInput">Title: </label>
-                    <input id="nameInput" class="form-control" type="text" ng-model="movie.searchString">
+                    <input id="nameInput" class="form-control" type="text" placeholder="Movie Title" ng-model="movie.searchString">
                 </div>
                 <button type="button" class="btn btn-default" id="submitBtn" ng-click="findMovie(movie); clear()">Find Film</button>
             </form>
-            <br>
+            <hr>
             <div ng-controller="DisplayController" id="displayDiv">
-                <h2>Search Result:</h2>
+                <h2 id="displayHeader">Search Result:</h2>
                 <img src={{searchResults.movie.Poster}} id="poster">
                 <br>
                 <p><strong>Film: </strong>{{searchResults.movie.Title}}</p>

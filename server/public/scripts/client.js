@@ -20,7 +20,7 @@ myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', 
   $scope.removeFav = WriteService.removeFav;
 }]);
 
-//================================================================================================================//
+//=======================================Factories=======================================//
 
 myApp.factory('SearchService', ['$http', function($http){
   var movie = {
