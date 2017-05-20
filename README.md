@@ -11,7 +11,9 @@ For this, the fifth Prime Weekend Challenge, I worked with AngularJS and the OMD
 
 Fork, clone, or download the project, then run `npm install`.
 
-In the `movies.js` file, you'll need to replace the `process.env.OMDBAPI` config variable with your own OMDb API key. It's a great service, especially for beginning developers, and I [highly recommend supporting them](https://www.patreon.com/omdb/posts) as you can.
+In the `db.js` file, you'll need to replace the `mongoURI` string with the URI for your own database.
+
+In the `movies.js` file, you'll need to replace the `process.env.OMDBAPI` config variable with your own OMDb API key. It's a useful service, especially for beginning developers, and I [highly recommend supporting them](https://www.patreon.com/omdb/posts) as you can.
 
 ## Built With
 

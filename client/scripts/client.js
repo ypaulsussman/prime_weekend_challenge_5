@@ -1,6 +1,9 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('InputController', ['$scope', 'SearchService', function($scope, SearchService){
+//=======================================Controllers=======================================//
+
+//Controller for searching OMDb
+myApp.controller('InputController', ['$scope', 'SearchService', function($scope, SearchService) {
   $scope.movie = SearchService.movie;
   $scope.findMovie = SearchService.findMovie;
   $scope.clear = function() {
@@ -8,12 +11,14 @@ myApp.controller('InputController', ['$scope', 'SearchService', function($scope,
   };
 }]);
 
-myApp.controller('DisplayController', ['$scope', 'SearchService', 'WriteService', function($scope, SearchService, WriteService){
+//Controller for displaying/saving films returned by search
+myApp.controller('DisplayController', ['$scope', 'SearchService', 'WriteService', function($scope, SearchService, WriteService) {
   $scope.searchResults = SearchService.searchResults;
   $scope.saveMovie = WriteService.saveMovie;
-}]);//end DisplayController
+}]);
 
-myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', function($scope, SearchService, WriteService){
+// Controller for displaying/removing saved movies
+myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', function($scope, SearchService, WriteService) {
   $scope.movieListObj = WriteService.movieListObj;
   WriteService.showSavedMovies();
   $scope.removeFav = WriteService.removeFav;
@@ -21,27 +26,34 @@ myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', 
 
 //=======================================Factories=======================================//
 
-myApp.factory('SearchService', ['$http', function($http){
+//Factory for searching OMDb
+myApp.factory('SearchService', ['$http', function($http) {
   var movie = {
     searchString: '',
   };
+
   var searchResults = {};
-  function findMovie(movie){
+
+  function findMovie(movie) {
     var copy = angular.copy[movie];
-    $http.get('/movies/search/'+ movie.searchString).then(function(response) {
+    $http.get('/movies/search/' + movie.searchString).then(function(response) {
       searchResults.movie = response.data;
-    });//end $http.get.then
-  }//end findMovie
+    });
+  }
+
   return {
-    movie : movie,
-    findMovie : findMovie,
-    searchResults : searchResults
-  };//end return
-}]);//end factory
+    movie: movie,
+    findMovie: findMovie,
+    searchResults: searchResults
+  };
+
+}]); //end SearchService
 
 
-myApp.factory('WriteService', ['$http', function($http){
+//Factory for interacting with favorite-movies db 
+myApp.factory('WriteService', ['$http', function($http) {
   var movieList = [];
+
   var movieListObj = {
     movieList: movieList
   };
@@ -49,27 +61,28 @@ myApp.factory('WriteService', ['$http', function($http){
   function showSavedMovies() {
     $http.get('/movies/saved').then(function(response) {
       movieListObj.movieList = response.data;
-      });
-    }//end showSavedMovies
+    });
+  }
 
   function saveMovie(newMovie) {
     var copy = angular.copy[newMovie];
     $http.post('/movies', newMovie.movie).then(function() {
       showSavedMovies();
-      });
-    }//end saveMovie
+    });
+  }
 
   function removeFav(index) {
     var removeID = movieListObj.movieList[index]._id;
-    $http.delete('/movies/'+removeID).then(function() {
+    $http.delete('/movies/' + removeID).then(function() {
       showSavedMovies();
     });
-    }
+  }
 
-  return{
-    saveMovie : saveMovie,
-    showSavedMovies : showSavedMovies,
-    movieListObj : movieListObj,
-    removeFav : removeFav
+  return {
+    saveMovie: saveMovie,
+    showSavedMovies: showSavedMovies,
+    movieListObj: movieListObj,
+    removeFav: removeFav
   };
-}]);
+
+}]);  //end WriteService

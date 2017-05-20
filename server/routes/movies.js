@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var request = require('request');
 
+// Schema for writing favorite-movies to db
 var MovieSchema = mongoose.Schema({
   title: String,
   director: String,
@@ -13,30 +14,32 @@ var MovieSchema = mongoose.Schema({
   year: Number
 });
 
+//Creates new db collection (and model) named "movies"
 var Movies = mongoose.model("movies", MovieSchema);
 
-router.get('/search/:title',function(req,res) {
+//searches OMDb for films' titles matching the search text
+router.get('/search/:title', function(req, res) {
   var title = req.params.title;
-  var url = 'http://www.omdbapi.com/?apikey='+ process.env.OMDBAPI + '&t=' + title;
+  var url = 'http://www.omdbapi.com/?apikey=' + process.env.OMDBAPI + '&t=' + title;
   request(url, function(err, resp, body) {
     if (err) {
       res.sendStatus(500);
     }
     res.send(body);
-  });//end request
-});//end router.get
+  });
+});
 
-
-router.get('/saved',function(req,res) {
+//returns all saved films from mLab db
+router.get('/saved', function(req, res) {
   Movies.find(function(err, favMovies) {
     if (err) {
       res.sendStatus(500);
     }
     res.send(favMovies);
   });
-});//end router.get
+});
 
-
+//saves new fillm to mLab db
 router.post('/', function(req, res) {
   var newMovie = new Movies();
   newMovie.title = req.body.Title;
@@ -52,18 +55,18 @@ router.post('/', function(req, res) {
     }
     res.send(savedMovie);
   });
-});//end router.post
+});
 
-
+//removes fillm from mLab db
 router.delete('/:id', function(req, res) {
   var removeID = req.params.id;
-  Movies.findByIdAndRemove(removeID, function(err, deletedFav){
-    if(err){
+  Movies.findByIdAndRemove(removeID, function(err, deletedFav) {
+    if (err) {
       res.sendStatus(500);
     }
     res.sendStatus(200);
   });
-});//end router.delete
+});
 
 
 module.exports = router;
