@@ -22,14 +22,14 @@ myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', 
 //=======================================Factories=======================================//
 
 myApp.factory('SearchService', ['$http', function($http){
-  var omdbAPIkey = config.omdbAPIkey;
+  // var omdbAPIkey = config.omdbAPIkey;
   var movie = {
     searchString: '',
   };
   var searchResults = {};
   function findMovie(movie){
     var copy = angular.copy[movie];
-    $http.get('http://www.omdbapi.com/'+ omdbAPIkey + 't=' + movie.searchString).then(function(response) {
+    $http.get('http://www.omdbapi.com/?apikey='+ process.env.OMDBAPI + '&t=' + movie.searchString).then(function(response) {
       searchResults.movie = response.data;
     });//end $http.get.then
   }//end findMovie
