@@ -1,27 +1,31 @@
-# Welcome to your 5th Weekend Challenge!
+# MEAN Movie Lister
 
-For this challenge, you will be working with Angular and the OMDB API to build an application that can search movies, and then a user can store their favorites!
+Y Paul Sussman: April 10th, 2017; Version 1.0
 
-## Base Mode
-Your application will need to be built from the ground up using Angular, Node, Express, and Bootstrap. The requirements of the application are:
+## Application Overview
+For this, the fifth Prime Weekend Challenge, I worked with AngularJS and the OMDB API to build an application that searches movies, allowing a user to store their favorites.
 
-* There should be two views to the application: one side that searches and displays movie information made available from OMDB. This should be accomplished by having an entry field for the search string, then a submit button that sends the information to OMDB. [X]
+![](omdb_screenshot.png)
 
-* When the API returns the response, the response should be data bound between an object and the response so that the search information appears as soon as the response returns from the API. [X]
+## Getting Started
 
-* You MUST use an Angular factory to send the API call ($http). [X]
+Fork, clone, or download the project, then run `npm install`.
 
-* The information that is returned from the API will be a movie object. You must display some of the movie information on the DOM in a meaningful way. Additionally, you must have an 'add to favorites' button on those results.[X]
+In the `movies.js` file, you'll need to replace the `process.env.OMDBAPI` config variable with your own OMDb API key. It's a great service, especially for beginning developers, and I [highly recommend supporting them](https://www.patreon.com/omdb/posts) as you can.
 
-* When the 'add to favorites' button is clicked, it should record the information for the movie and store it into an array of favorites. [X]
+## Built With
 
-* The other view should display the favorite movies selected by the user. [X]
+* HTML 5, CSS 3, Bootstrap, and AngularJS;
+* Node.js, Express.js, and MondgoDB; and
+* Heroku and mLab for hosting.
 
-## Hard Mode
-When a favorite is added to the favorites list, store the favorites list in a Mongo Database.
+## Learning Value
+Ironically, perhaps, for my first for project integrating MongoDB and AngularJS? My first major rabbit hole in this project revolved around Bootstrap and padding inheritance: here is where I truly begin to appreciate the power of the "Styles" pane inside Chrome's developer tools, as well as its "mouseover to inspect element" feature.
 
-## Pro Mode
-Add the ability to remove a movie from the Mongo Database, and ensure that the favorites view updates as well.
+One great weakness of this project stems from my unfamiliarity, at the time, with how to manipulate data bindings inside an `ng-repeat`. Rather than exploring these to satisfaction, I met the project deadline by using the more-restrictive search parameter that OMDb offers (title, rather than search keyword.)
 
-## Master Mode
-Host the application on Heroku and mLabs. No need to do a data dump of an existing database.
+As a result, the search feature only displays exact title matches: "_Big Trouble Little China_" returns nothing, for example, because of that missing "_in_." (It's no coincidence that my immediately-following projects, the [Karen-English Picture Dictionary](https://github.com/ypaulsussman/karen_english_picture_dictionary) and the [AchieveMpls Coaching Experience](https://github.com/AchieveMpls/achieve-mpls-app), are both stacked to the ceiling with `ng-repeat`'s...!)
+
+Finally, several weeks after I had completed the project, OMDb (_very reasonably_) cancelled their support for API calls lacking a key. One Patreon pledge later, I had the key: but it took me the better part of a Saturday afternoon to deduce how to use it.
+
+From a false turn using a separate, `gitignore`'d config file (_Heroku was not impressed_) to blithely attempting to run environmental variables on the client, it was a... protracted experience. Still, it was one of the first times in my career as a developer where I had, with no support, taught myself several new technologies in order to solve a problem I had not even been able to elucidate at the beginning of the day. That was very rewarding: and, in all likelihood, a process I'll need to get used to.
