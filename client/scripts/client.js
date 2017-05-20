@@ -16,20 +16,20 @@ myApp.controller('DisplayController', ['$scope', 'SearchService', 'WriteService'
 myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', function($scope, SearchService, WriteService){
   $scope.movieListObj = WriteService.movieListObj;
   WriteService.showSavedMovies();
-  console.log('ssm just finished');
   $scope.removeFav = WriteService.removeFav;
 }]);
 
 //=======================================Factories=======================================//
 
 myApp.factory('SearchService', ['$http', function($http){
+  var omdbAPIkey = config.omdbAPIkey;
   var movie = {
     searchString: '',
   };
   var searchResults = {};
   function findMovie(movie){
     var copy = angular.copy[movie];
-    $http.get('http://www.omdbapi.com/?t=' + movie.searchString).then(function(response) {
+    $http.get('http://www.omdbapi.com/'+ omdbAPIkey + 't=' + movie.searchString).then(function(response) {
       searchResults.movie = response.data;
     });//end $http.get.then
   }//end findMovie
@@ -50,7 +50,6 @@ myApp.factory('WriteService', ['$http', function($http){
   function showSavedMovies() {
     $http.get('/movies').then(function(response) {
       movieListObj.movieList = response.data;
-      console.log('mlo.ml is now: ', movieListObj.movieList);
       });
     }//end showSavedMovies
 
@@ -62,9 +61,7 @@ myApp.factory('WriteService', ['$http', function($http){
     }//end saveMovie
 
   function removeFav(index) {
-    console.log(index);
     var removeID = movieListObj.movieList[index]._id;
-    console.log(removeID);
     $http.delete('/movies/'+removeID).then(function() {
       showSavedMovies();
     });
