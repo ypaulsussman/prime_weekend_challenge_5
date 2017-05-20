@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var request = require('request');
 
 var MovieSchema = mongoose.Schema({
   title: String,
@@ -14,10 +15,21 @@ var MovieSchema = mongoose.Schema({
 
 var Movies = mongoose.model("movies", MovieSchema);
 
-router.get('/',function(req,res) {
+router.get('/search/:title',function(req,res) {
+  var title = req.params.title;
+  var url = 'http://www.omdbapi.com/?apikey='+ process.env.OMDBAPI + '&t=' + title;
+  request(url, function(err, resp, body) {
+    if (err) {
+      res.sendStatus(500);
+    }
+    res.send(body);
+  });//end request
+});//end router.get
+
+
+router.get('/saved',function(req,res) {
   Movies.find(function(err, favMovies) {
     if (err) {
-      console.log('error reading from db: ', err);
       res.sendStatus(500);
     }
     res.send(favMovies);
@@ -26,7 +38,6 @@ router.get('/',function(req,res) {
 
 
 router.post('/', function(req, res) {
-  console.log('request received: ', req.body);
   var newMovie = new Movies();
   newMovie.title = req.body.Title;
   newMovie.director = req.body.Director;
@@ -37,22 +48,19 @@ router.post('/', function(req, res) {
   newMovie.year = req.body.Year;
   newMovie.save(function(err, savedMovie) {
     if (err) {
-      console.log('error saving to db: ', err);
       res.sendStatus(500);
     }
     res.send(savedMovie);
   });
 });//end router.post
 
+
 router.delete('/:id', function(req, res) {
   var removeID = req.params.id;
-  console.log('request received: ', removeID);
   Movies.findByIdAndRemove(removeID, function(err, deletedFav){
     if(err){
-      console.log('error removing: ', err);
       res.sendStatus(500);
     }
-    console.log(deletedFav, ' removed from db');
     res.sendStatus(200);
   });
 });//end router.delete

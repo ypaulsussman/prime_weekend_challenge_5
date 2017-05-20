@@ -22,14 +22,13 @@ myApp.controller('SavedController', ['$scope', 'SearchService', 'WriteService', 
 //=======================================Factories=======================================//
 
 myApp.factory('SearchService', ['$http', function($http){
-  // var omdbAPIkey = config.omdbAPIkey;
   var movie = {
     searchString: '',
   };
   var searchResults = {};
   function findMovie(movie){
     var copy = angular.copy[movie];
-    $http.get('http://www.omdbapi.com/?apikey='+ process.env.OMDBAPI + '&t=' + movie.searchString).then(function(response) {
+    $http.get('/movies/search/'+ movie.searchString).then(function(response) {
       searchResults.movie = response.data;
     });//end $http.get.then
   }//end findMovie
@@ -48,7 +47,7 @@ myApp.factory('WriteService', ['$http', function($http){
   };
 
   function showSavedMovies() {
-    $http.get('/movies').then(function(response) {
+    $http.get('/movies/saved').then(function(response) {
       movieListObj.movieList = response.data;
       });
     }//end showSavedMovies
