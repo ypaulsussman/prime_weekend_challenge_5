@@ -2,10 +2,10 @@
   "name": "chi_mean",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "engines": {
       "node": "6.11.1"
     },
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js"
